@@ -34,6 +34,16 @@
                 <input type="text" class="form-control" id="penulis_buku" name="penulis_buku">
             </div>
             <div class="mb-3">
+                <label for="genre" class="form-label">Genre</label>
+                <select name="genre" id="genre" class="form-control">
+                    <option value=""></option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="horror">Horror</option>
+                    <option value="thriller">Thriller</option>
+                    <option value="romance">Romance</option>
+                </select>
+            </div>
+            <div class="mb-3">
                 <label for="tahun_terbit" class="form-label">Tahun Terbit</label>
                 <input type="text" class="form-control" id="tahun_terbit" name="tahun_terbit">
             </div>
