@@ -1,0 +1,54 @@
+@extends('layouts.app')
+
+@section('content')
+
+@if($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach($errors->all() as $error)
+
+        <li>{{ $error }}</li>
+
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<div class="card mt-4">
+    <div class="card-body p-5">
+
+        <h5 class="card-title fw-bolder mb-3">Add Doujin</h5>
+
+        <form method="post" id="addform" action="{{ route('doujin.store') }}">
+            @csrf
+            <div class="mb-3">
+                <label for="doujin_title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="doujin_title" name="doujin_title">
+            </div>
+            <div class="mb-3">
+                <label for="doujin_author" class="form-label">Author</label>
+                <input type="text" class="form-control" id="doujin_author" name="doujin_author">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" name="price" min="5000">
+            </div>
+            <div class="mb-3">
+                <label for="id_shelf" class="form-label">Shelf</label>
+                <input type="number" class="form-control" id="id_shelf" name="id_shelf" min="1">
+            </div>
+            <div class="text-center d-flex justify-content-end">
+                <div>
+                    <a class="btn px-3 items-center" href="{{ route('doujin.index') }}"><i class="fa fa-ban fa-2x"
+                            aria-hidden="true"></i></a>
+                </div>
+                <div>
+                    <a class="btn px-3 items-center" href="#" onclick="document.getElementById('addform').submit()"><i
+                            class="fa fa-check text-black fa-2x" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@stop
