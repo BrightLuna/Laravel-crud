@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'MA | G | JIN') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -28,7 +28,7 @@
 <body>
 
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm position-sticky top-0">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm position-sticky top-0 z-10">
             <div class="container">
                 <a class="navbar-brand d-flex flex-row align-items-center" href="{{ url('/') }}">
                     <h3 class="col p-2">MA | G | JIN</h3>

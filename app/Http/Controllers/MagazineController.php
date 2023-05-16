@@ -25,7 +25,9 @@ class MagazineController extends Controller
 
     public function create()
     {
-        return view('magazine.add');
+        $shelfs = DB::select("SELECT * FROM shelf");
+
+        return view('magazine.add')->with('shelfs', $shelfs);
     }
 
     public function store(Request $request)
@@ -55,8 +57,9 @@ class MagazineController extends Controller
     public function edit($id_magazine)
     {
         $data = DB::table('magazine')->where('id_magazine', $id_magazine)->first();
+        $shelfs = DB::select("SELECT * FROM shelf");
 
-        return view('magazine.edit')->with('data', $data);
+        return view('magazine.edit')->with('data', $data)->with('shelfs', $shelfs);
     }
 
     public function update($id_magazine, Request $request)

@@ -34,7 +34,6 @@
             <div class="mb-3">
                 <label for="genre" class="form-label">Genre</label>
                 <select name="genre" id="genre" class="form-control">
-                    <option value=""></option>
                     <option value="Seinen">Seinen</option>
                     <option value="Shoujo">Shoujo</option>
                     <option value="Shounen">Shounen</option>
@@ -46,8 +45,11 @@
             </div>
             <div class="mb-3">
                 <label for="id_shelf" class="form-label">Shelf</label>
-                <input type="number" class="form-control" id="id_shelf" name="id_shelf" value="{{ $data->id_shelf }}"
-                    min="1">
+                <select name="id_shelf" id="id_shelf" class="form-control">
+                    @foreach ($shelfs as $shelf)
+                    <option value="{{ $shelf->id_shelf }}">{{ $shelf->id_shelf }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="text-center d-flex justify-content-end">
                 <div>

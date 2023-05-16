@@ -25,7 +25,9 @@ class DoujinController extends Controller
 
     public function create()
     {
-        return view('doujin.add');
+        $shelfs = DB::select("SELECT * FROM shelf");
+
+        return view('doujin.add')->with('shelfs', $shelfs);
     }
 
     public function store(Request $request)
@@ -55,8 +57,9 @@ class DoujinController extends Controller
     public function edit($id_doujin)
     {
         $data = DB::table('doujin')->where('id_doujin', $id_doujin)->first();
+        $shelfs = DB::select("SELECT * FROM shelf");
 
-        return view('doujin.edit')->with('data', $data);
+        return view('doujin.edit')->with('data', $data)->with('shelfs', $shelfs);
     }
 
     public function update($id_doujin, Request $request)

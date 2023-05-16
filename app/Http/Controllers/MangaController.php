@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // use App\Models\Buku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Termwind\Components\Dd;
 
 class MangaController extends Controller
 {
@@ -20,24 +21,26 @@ class MangaController extends Controller
         $datas = DB::select("SELECT * FROM manga WHERE recycled = 0");
         $recycles = DB::select("SELECT * FROM manga WHERE recycled = 1");
 
-        return view('manga.index')->with('datas', $datas)->with('recycles', $recycles);
+        return view('manga.index', ['datas' => $datas, 'recycles' => $recycles]);
     }
 
     public function create()
     {
-        return view('manga.add');
+        $mangas = DB::select("SELECT * FROM manga");
+        $shelfs = DB::select("SELECT * FROM shelf");
+
+        return view('manga.add')->with('shelfs', $shelfs)->with('mangas', $mangas);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            // 'id_manga' => 'required',
             'manga_title' => 'required',
             'manga_author' => 'required',
             'genre' => 'required',
             'price' => 'required',
             'id_shelf' => 'required',
-            
+
         ]);
 
         DB::insert(
@@ -51,15 +54,15 @@ class MangaController extends Controller
                 'id_shelf' => $request->id_shelf,
             ]
         );
-
         return redirect()->route('manga.index')->with('success', 'Success! A manga has been saved');
     }
 
     public function edit($id_manga)
     {
         $data = DB::table('manga')->where('id_manga', $id_manga)->first();
+        $shelfs = DB::select("SELECT * FROM shelf");
 
-        return view('manga.edit')->with('data', $data);
+        return view('manga.edit')->with('data', $data)->with('shelfs', $shelfs);
     }
 
     public function update($id_manga, Request $request)
@@ -96,7 +99,7 @@ class MangaController extends Controller
         $search = $request->search;
 
         $datas = DB::select("SELECT * FROM manga WHERE (manga_title LIKE '%$search%' OR manga_author LIKE '%$search%') AND recycled = 0");
-        
+
         $recycles = DB::select("SELECT * FROM manga WHERE (manga_title LIKE '%$search%' OR manga_author LIKE '%$search%') AND recycled = 1");
         return view('manga.index')->with('datas', $datas)->with('recycles', $recycles);
     }

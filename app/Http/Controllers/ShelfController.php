@@ -20,11 +20,14 @@ class ShelfController extends Controller
      */
     public function index()
     {
+        //get all data from shelf table
+        $shelfs = DB::select('select * from shelf');
+
         //get all data from database
         $datasmanga = DB::select("SELECT * FROM shelf left join manga on manga.id_shelf = shelf.id_shelf WHERE recycled = 0");
         $datasdoujin = DB::select("SELECT * FROM shelf left join doujin on doujin.id_shelf = shelf.id_shelf WHERE recycled = 0");
         $datasmagazine = DB::select("SELECT * FROM shelf left join magazine on magazine.id_shelf = shelf.id_shelf WHERE recycled = 0");
-        return view('shelf.index')->with('datasmanga', $datasmanga)->with('datasdoujin', $datasdoujin)->with('datasmagazine', $datasmagazine);
+        return view('shelf.index')->with('shelfs', $shelfs)->with('datasmanga', $datasmanga)->with('datasdoujin', $datasdoujin)->with('datasmagazine', $datasmagazine);
     }
 
     /**
